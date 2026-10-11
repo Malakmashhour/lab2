@@ -9,6 +9,11 @@ public class char_scribt : MonoBehaviour
     public KeyCode Spacebar;
     public KeyCode L;
      public KeyCode R;
+    public Transform groundCheck;
+    public float groundCheckRadius;
+    public LayerMask whatIsGround;
+    private bool grounded;
+
     void Start()
     {
         
@@ -20,7 +25,7 @@ public class char_scribt : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(Spacebar))
+        if (Input.GetKeyDown(Spacebar) && grounded)
         {
            Jump();
 
@@ -58,5 +63,14 @@ if (Input.GetKey(R))
         {
         GetComponent<Rigidbody2D>().velocity =new Vector2(GetComponent<Rigidbody2D>().velocity.x,JumpHeigh);
         }
-
+    void FixedUpdate()
+    {
+        grounded = Physics2D.OverlapCircle(
+            groundCheck.position,
+            groundCheckRadius,
+            whatIsGround
+        );
+    }
 }
+
+
