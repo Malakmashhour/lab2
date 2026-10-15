@@ -13,10 +13,10 @@ public class char_scribt : MonoBehaviour
     public float groundCheckRadius;
     public LayerMask whatIsGround;
     private bool grounded;
-
+    private Animator anim; 
     void Start()
     {
-        
+       anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -53,15 +53,15 @@ if (Input.GetKey(R))
 
         }
 
-
-
-
-
+anim.SetFloat("speed",Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x));
+anim.SetFloat("high", GetComponent<Rigidbody2D>().velocity.y);
+anim.SetBool("ground", grounded);
     }
 
          void Jump()
         {
         GetComponent<Rigidbody2D>().velocity =new Vector2(GetComponent<Rigidbody2D>().velocity.x,JumpHeigh);
+
         }
     void FixedUpdate()
     {
